@@ -53,6 +53,27 @@ app.get('/user/:uid',function(req,res){
     });
 });
 
+// fetch all messages belonging to user uid
+app.get('/user/messages/:uid',function(req,res){
+    const uid = req.params.uid;
+    var data = {
+        "error":true,
+        "Messages":""
+    };
+    
+    connection.query('SELECT mid, message FROM messages where uid_fk = "' + uid +'"',function(err, rows, fields){
+        if(rows.length != 0){
+            data["error"] = false;
+            data["Messages"] = rows;
+            res.json(data);
+        }else{
+            data["error"] = true;
+            data["Messages"] = 'No Message found for user '+ uid;
+            res.json(data);
+        }
+    });
+});
+
 http.listen(8000, function(){
     console.log('Connected & Listen to port 8000');
 });
