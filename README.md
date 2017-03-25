@@ -79,8 +79,28 @@ http://localhost:8000/users
 	}]
 }
 ```
+Use a rest client like [POSTMAN](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) REST  Extention to make the PUT request
+##### PUT update message for user `1`
+>`http://localhost:8000/user/message`
 
+**Request:**
+```
+{
+	"mid": 1,
+	"message": "User is making a request update to message here!"
+}
+```
+**Response:**
+```
+{
+  "error": false,
+  "Message": "Updated Message Successfully"
+}
+```
 
+Screenshot:
+
+![update message for user](./screenshot/put-postman.png  "update message for user")
 
 
 
