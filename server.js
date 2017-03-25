@@ -32,6 +32,27 @@ app.get('/users',function(req,res){
     });
 });
 
-http.listen(8080, function(){
-    console.log('Connected & Listen to port 8080');
+// fetch user data based on uid value, validating the user id input
+app.get('/user/:uid',function(req,res){
+    const uid = req.params.uid;
+    var data = {
+        "error":true,
+        "User":""
+    };
+    
+    connection.query('SELECT * FROM users where uid = "' + uid +'"',function(err, rows, fields){
+        if(rows.length != 0){
+            data["error"] = false;
+            data["User"] = rows;
+            res.json(data);
+        }else{
+            data["error"] = true;
+            data["User"] = 'No user found with id ' + uid;
+            res.json(data);
+        }
+    });
+});
+
+http.listen(8000, function(){
+    console.log('Connected & Listen to port 8000');
 });
