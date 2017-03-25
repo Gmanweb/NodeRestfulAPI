@@ -74,6 +74,33 @@ app.get('/user/messages/:uid',function(req,res){
     });
 });
 
+// Update message belonging to user uid
+app.put('/user/message',function(req,res){
+    var Mid = req.body.mid;
+    var Message = req.body.message;
+    var Uid = 1;
+    var data = {
+        "error":true,
+        "Message":""
+    };
+    
+    if(!!Mid && !!Message && !!Uid){
+        connection.query("Update messages SET message =? where mid =? and uid_fk =?",[Message,Mid,Uid],function(err, rows, fields){
+            if(!!err){
+                data["Message"] = "Error Updating Message Data for User " + Uid;
+            }else{
+                data["error"] = false;
+                data["Message"] = "Updated Message Successfully";
+            }
+            res.json(data);
+        });
+    }else{
+        data["error"] = true;
+        data["Message"] = "Please provide all required data (i.e :Mid, Message, Uid)";
+        res.json(data);
+    }
+});
+
 http.listen(8000, function(){
     console.log('Connected & Listen to port 8000');
 });

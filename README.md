@@ -26,7 +26,7 @@ Open your browser
 ```
 http://localhost:8000/users
 ```
-#### GET
+##### GET users
 > `http://localhost:8000/users`
 ```
 {
@@ -45,6 +45,7 @@ http://localhost:8000/users
 	}]
 }
 ```
+##### GET user `2`
 > `http://localhost:8000/user/2`
 ```
 {
@@ -55,6 +56,26 @@ http://localhost:8000/users
 		username: "web",
 		password: "password",
 		email: "web@n.ie"
+	}]
+}
+```
+##### GET messages for user `1`
+>`http://localhost:8000/user/messages/1`
+```
+{
+	error: false,
+	Messages: [
+	{
+		mid: 1,
+		message: "User is making a request"
+	},
+	{
+		mid: 2,
+		message: "Check out the Restful service here"
+	},
+	{
+		mid: 3,
+		message: "This REST is the real deal"
 	}]
 }
 ```
