@@ -1,0 +1,4 @@
+# When using GIT this file specifies files/folders to be ignore intentionally
+# http://git-scm.com/docs/gitignore
+
+node_modules/
