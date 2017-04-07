@@ -1,0 +1,32 @@
+version: '2.1'
+services: 
+
+  database:
+    image: mysql
+    container_name: mysql.dev
+    command: mysqld --user=root --verbose
+    volumes:
+      - /apps/docker/mysql:/var/lib/mysql
+      - ./mysql/dbsetup.sql:/tmp/dbsetup.sql
+      - ./mysql/importdb.sh:/tmp/importdb.sh
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "NodeRestFulAPIDB"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    networks: 
+      apinetwork:
+
+networks:
+  apinetwork:
+    driver: bridge
+    ipam: 
+      config: 
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
+          aux_addreses:
+            database: 172.16.238.2 
+# ipam is removed in version 3, issues with swarm mode
+# https://github.com/docker/compose/issues/4474     

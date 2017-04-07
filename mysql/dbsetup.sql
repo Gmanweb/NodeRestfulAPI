@@ -32,6 +32,4 @@ INSERT INTO `messages` (`mid`, `message`, `uid_fk`) VALUES
 (4, 'Call me, we do lunch after this REST', 2);
 
 -- select statement, test the data.
-SELECT * FROM NodeRestFulAPIDB.messages where uid_fk like 1;
-
-
+-- SELECT * FROM NodeRestFulAPIDB.messages where uid_fk like 1;

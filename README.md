@@ -13,8 +13,46 @@ $ cd NodeRestfulAPI
 
 $ npm install
 ```
-- Start node server
-Open another terminal in the same folder 'NodeRestfulAPI' and run the folling command
+### Docker Mysql
+Run the docker compose file to download and run a mysql container in it own network.
+
+```
+docker-compose up -d
+```
+
+should return something like.
+
+```
+Compose does not use swarm mode to deploy services to multiple nodes in a swarm. All containers will be scheduled on the current node.
+To deploy your application across the swarm, use `docker stack deploy`.
+
+Creating network "noderestfulapi_apinetwork" with driver "bridge"
+Creating mysql.dev
+```
+
+Create tables and insert data in DB, run the following command
+
+```
+docker exec mysql.dev bash /tmp/importdb.sh`
+```
+
+#### Inspect the container and/or network
+
+**container**
+
+```
+docker inspect mysql.dev
+```
+
+**network**
+
+```
+docker inspect noderestfulapi_apinetwork
+```
+
+- **Start node server**
+Open another terminal in the same folder 'NodeRestfulAPI' and run the folling command, the configuration has the container name hard coded in db url.
+
 ```
 node server.js
 ```
@@ -26,6 +64,12 @@ Open your browser
 ```
 http://localhost:8000/users
 ```
+
+#### Mysql Data persistent to host
+Location `/apps/docker/mysql/` this is set in the Docker-compose file.
+Remove the data, run `sudo rm -r /apps/docker/mysql/`
+
+### Rest Calls
 ##### GET users
 > `http://localhost:8000/users`
 ```
