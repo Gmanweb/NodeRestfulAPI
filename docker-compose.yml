@@ -18,6 +18,16 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     networks: 
       apinetwork:
+  web:
+    build: .
+    container_name: noderest
+    command: npm start
+    #volumes:
+     # - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    networks: 
+      apinetwork:
 
 networks:
   apinetwork:
