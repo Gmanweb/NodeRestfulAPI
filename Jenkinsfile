@@ -11,6 +11,17 @@ pipeline {
     
     stages {
         
+        stage('Docker Build with sudo') {
+            agent any
+            steps {
+                sh "sudo docker build -t ${env.DOCKER_HUB_ACCOUNT}/${env.APPLICATION_NAME}:${env.APPLICATION_TAG_VERSION} ."
+            }
+        }
+  
+    }
+    
+    stages {
+        
         stage('Docker Build') {
             agent any
             steps {
